@@ -143,8 +143,6 @@ jobs:
 
             # We run all tests
             - name: 'Check-only deploy delta changes - run all tests'
-              run: |
-                  sfdx force:source:deploy -p "changed-sources/force-app" --checkonly --testlevel RunLocalTests  --json
-
-            - name: 'Deploy destructive changes (if any)'
-              run: sfdx force:mdapi:deploy -d "changed-sources/destructiveChanges" --checkonly --ignorewarnings 
+              run: sfdx force:source:convert -r "changed-sources/force-app" -d ./toDeploy
+                sfdx force:mdapi:deploy -l RunLocalTests -c -d ./toDeploy -u integration -w 10
+           
