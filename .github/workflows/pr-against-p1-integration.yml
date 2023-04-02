@@ -143,6 +143,7 @@ jobs:
 
             # We run all tests
             - name: 'Check-only deploy delta changes - run all tests'
-              run: sfdx force:source:convert -r "changed-sources/force-app" -d ./toDeploy
-                sfdx force:mdapi:deploy -l RunLocalTests -c -d ./toDeploy -u integration -w 10
+              run: |
+                  sfdx force:source:convert -r "changed-sources/force-app" -d ./toDeploy
+                  sfdx force:mdapi:deploy -l RunLocalTests -c -d ./toDeploy -u integration -w 10
            
